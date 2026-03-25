@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tender Progress Tracker</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #dbeafe;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --warning: #ea580c;
+  --warning-light: #fff7ed;
+  --danger: #dc2626;
+  --danger-light: #fef2f2;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; font-size: 14px; }
+
+.login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
+.login-card { background: white; border-radius: 12px; padding: 40px; width: 400px; max-width: 90vw; box-shadow: var(--shadow-lg); }
+.login-card h1 { font-size: 24px; margin-bottom: 4px; color: var(--gray-900); }
+.login-card p.sub { color: var(--gray-500); margin-bottom: 24px; font-size: 14px; }
+.login-card .logo { font-size: 32px; margin-bottom: 16px; display: block; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--gray-300); border-radius: var(--radius); font-size: 14px; transition: border-color 0.15s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.btn { padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 600; border: none; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-300); }
+.btn-secondary:hover { background: var(--gray-200); }
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover { background: #b91c1c; }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+.btn-full { width: 100%; justify-content: center; }
+.login-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
+
+.app { display: none; }
+.app.active { display: flex; min-height: 100vh; }
+.sidebar { width: 260px; background: var(--gray-900); color: white; flex-shrink: 0; display: flex; flex-direction: column; }
+.sidebar-header { padding: 20px 20px 16px; border-bottom: 1px solid var(--gray-700); }
+.sidebar-header h2 { font-size: 16px; font-weight: 700; }
+.sidebar-header p { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+.sidebar-nav { flex: 1; padding: 12px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); color: var(--gray-300); font-size: 14px; cursor: pointer; transition: all 0.15s; margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left; }
+.nav-item:hover { background: var(--gray-800); color: white; }
+.nav-item.active { background: var(--primary); color: white; }
+.nav-item .icon { width: 20px; text-align: center; font-size: 16px; }
+.sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--gray-700); }
+.user-info { display: flex; align-items: center; gap: 10px; padding: 8px; }
+.user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+.user-name { font-size: 13px; font-weight: 600; }
+.user-role { font-size: 11px; color: var(--gray-400); }
+.logout-btn { width: 100%; margin-top: 8px; padding: 8px; border-radius: var(--radius); background: var(--gray-800); color: var(--gray-300); border: none; font-size: 13px; cursor: pointer; }
+.logout-btn:hover { background: var(--gray-700); color: white; }
+
+.main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.notif-bar { display: none; padding: 12px 28px; font-size: 14px; font-weight: 500; }
+.notif-bar.active { display: flex; align-items: center; gap: 8px; }
+.notif-bar.warning { background: #fef3c7; color: #92400e; }
+.notif-bar.info { background: var(--primary-light); color: var(--primary-dark); }
+.topbar { background: white; padding: 16px 28px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
+.topbar h1 { font-size: 20px; color: var(--gray-900); }
+.content { flex: 1; overflow-y: auto; padding: 28px; }
+
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+.stat-card .stat-label { font-size: 13px; color: var(--gray-500); font-weight: 500; }
+.stat-card .stat-value { font-size: 32px; font-weight: 700; color: var(--gray-900); margin-top: 4px; }
+.stat-card .stat-sub { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+.stat-card.highlight { border-left: 4px solid var(--primary); }
+.stat-card.warning { border-left: 4px solid var(--warning); }
+.stat-card.success { border-left: 4px solid var(--success); }
+.stat-card.danger { border-left: 4px solid var(--danger); }
+
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
+.card-header h3 { font-size: 15px; font-weight: 600; }
+.card-body { padding: 20px; }
+
+table { width: 100%; border-collapse: collapse; }
+table th { text-align: left; padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--gray-100); }
+table tr:hover { background: var(--gray-50); }
+table tr { cursor: pointer; }
+
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-blue { background: var(--primary-light); color: var(--primary); }
+.badge-green { background: var(--success-light); color: var(--success); }
+.badge-orange { background: var(--warning-light); color: var(--warning); }
+.badge-red { background: var(--danger-light); color: var(--danger); }
+.badge-gray { background: var(--gray-100); color: var(--gray-500); }
+
+.progress-bar { height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+.progress-fill.low { background: var(--danger); }
+.progress-fill.mid { background: var(--warning); }
+.progress-fill.high { background: var(--success); }
+
+.stage-list { list-style: none; }
+.stage-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+.stage-item:last-child { border-bottom: none; }
+.stage-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.stage-num.not-started { background: var(--gray-200); color: var(--gray-500); }
+.stage-num.in-progress { background: var(--primary); color: white; }
+.stage-num.completed { background: var(--success); color: white; }
+.stage-name { flex: 1; font-size: 14px; }
+.stage-status-select { padding: 6px 10px; border-radius: var(--radius); font-size: 13px; border: 1px solid var(--gray-300); background: white; }
+
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: white; border-radius: 12px; width: 560px; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+.modal-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
+.modal-header h2 { font-size: 18px; }
+.modal-close { background: none; border: none; font-size: 24px; color: var(--gray-400); cursor: pointer; }
+.modal-close:hover { color: var(--gray-600); }
+.modal-body { padding: 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-200); display: flex; justify-content: flex-end; gap: 8px; }
+
+.activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+.activity-item:last-child { border-bottom: none; }
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); margin-top: 6px; flex-shrink: 0; }
+.activity-text { font-size: 13px; color: var(--gray-700); }
+.activity-time { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+.deadline-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.deadline-item:last-child { border-bottom: none; }
+.deadline-name { font-size: 14px; font-weight: 500; cursor: pointer; }
+.deadline-name:hover { color: var(--primary); }
+.deadline-urgent { color: var(--danger); font-weight: 600; font-size: 13px; }
+.deadline-soon { color: var(--warning); font-weight: 600; font-size: 13px; }
+.deadline-ok { color: var(--gray-500); font-size: 13px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+.workload-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.workload-item:last-child { border-bottom: none; }
+.workload-name { font-size: 14px; font-weight: 500; }
+.workload-count { font-size: 13px; color: var(--gray-500); }
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--gray-400); }
+.empty-state .es-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 15px; }
+
+.user-list-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+.user-list-item:last-child { border-bottom: none; }
+
+.back-btn { background: none; border: none; color: var(--primary); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-weight: 500; margin-bottom: 16px; padding: 0; }
+.back-btn:hover { text-decoration: underline; }
+
+.tender-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px; }
+.meta-label { color: var(--gray-500); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.meta-value { margin-top: 2px; color: var(--gray-800); font-size: 14px; }
+
+.notes-area { width: 100%; min-height: 80px; padding: 10px 12px; border: 1px solid var(--gray-300); border-radius: var(--radius); font-size: 14px; resize: vertical; }
+.notes-area:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-page" id="loginPage">
+  <div class="login-card">
+    <span class="logo">&#128203;</span>
+    <h1>Tender Progress Tracker</h1>
+    <p class="sub">Sign in to manage and track your tenders</p>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Enter your username" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter your password">
+    </div>
+    <button class="btn btn-primary btn-full" onclick="handleLogin()" style="margin-top:8px">Sign In</button>
+    <div class="login-error" id="loginError">Invalid username or password.</div>
+    <p style="margin-top:16px; font-size:12px; color:var(--gray-400); text-align:center;">Default manager: admin / admin123</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+  <div class="sidebar">
+    <div class="sidebar-header"><h2>&#128203; Tender Tracker</h2><p>Proposal Management</p></div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')"><span class="icon">&#128200;</span> Dashboard</button>
+      <button class="nav-item" data-page="tenders" onclick="showPage('tenders')"><span class="icon">&#128196;</span> All Tenders</button>
+      <button class="nav-item" data-page="digest" onclick="showPage('digest')"><span class="icon">&#128233;</span> Daily Digest</button>
+      <button class="nav-item" data-page="users" onclick="showPage('users')" id="navUsers" style="display:none"><span class="icon">&#128101;</span> Manage Users</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div><div class="user-name" id="userDisplayName">Admin</div><div class="user-role" id="userRoleDisplay">Manager</div></div>
+      </div>
+      <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="notif-bar warning" id="notifBar"></div>
+    <div class="topbar"><h1 id="pageTitle">Dashboard</h1><div id="topbarActions"></div></div>
+    <div class="content" id="contentArea">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="pageDashboard">
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="two-col">
+          <div>
+            <div class="card"><div class="card-header"><h3>Upcoming Deadlines</h3></div><div class="card-body" id="deadlinesList"></div></div>
+            <div class="card"><div class="card-header"><h3>Recent Activity</h3></div><div class="card-body" id="recentActivity"></div></div>
+          </div>
+          <div>
+            <div class="card"><div class="card-header"><h3>Team Workload</h3></div><div class="card-body" id="teamWorkload"></div></div>
+            <div class="card"><div class="card-header"><h3>Tenders by Stage</h3></div><div class="card-body" id="stageBreakdown"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TENDERS LIST -->
+      <div class="page" id="pageTenders">
+        <div class="card"><div class="card-body" style="padding:0">
+          <table id="tendersTable"><thead><tr><th>Tender Name</th><th>Sales Lead</th><th>Process Lead</th><th>Progress</th><th>Submission Date</th><th>Status</th></tr></thead><tbody id="tendersBody"></tbody></table>
+          <div class="empty-state" id="tendersEmpty" style="display:none"><div class="es-icon">&#128196;</div><p>No tenders yet. Create one to get started.</p></div>
+        </div></div>
+      </div>
+
+      <!-- TENDER DETAIL -->
+      <div class="page" id="pageTenderDetail">
+        <button class="back-btn" onclick="showPage('tenders')">&#8592; Back to Tenders</button>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px">
+          <h2 id="detailTenderName" style="font-size:22px;color:var(--gray-900)"></h2>
+          <div style="display:flex;gap:8px" id="detailActions"></div>
+        </div>
+        <div class="tender-meta" id="detailMeta"></div>
+        <div class="two-col">
+          <div class="card"><div class="card-header"><h3>Stage Progress</h3></div><div class="card-body"><ul class="stage-list" id="detailStages"></ul></div></div>
+          <div><div class="card"><div class="card-header"><h3>Daily Progress Notes</h3><button class="btn btn-primary btn-sm" onclick="openAddNote()">+ Add Note</button></div><div class="card-body" id="detailNotes"></div></div></div>
+        </div>
+      </div>
+
+      <!-- DIGEST -->
+      <div class="page" id="pageDigest"><div id="digestContent"></div></div>
+
+      <!-- USERS -->
+      <div class="page" id="pageUsers">
+        <div class="card"><div class="card-header"><h3>Team Members</h3><button class="btn btn-primary btn-sm" onclick="openAddUser()">+ Add User</button></div><div class="card-body" id="usersList"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Tender -->
+<div class="modal-overlay" id="tenderModal"><div class="modal">
+  <div class="modal-header"><h2 id="tenderModalTitle">New Tender</h2><button class="modal-close" onclick="closeModal('tenderModal')">&times;</button></div>
+  <div class="modal-body">
+    <div class="form-group"><label>Tender Name *</label><input type="text" id="tenderName" placeholder="e.g., ABC Water Treatment Plant"></div>
+    <div class="form-group"><label>Sales Lead</label><input type="text" id="tenderSalesLead" placeholder="Name of the sales lead"></div>
+    <div class="form-group"><label>Process Lead</label><select id="tenderProcessLead"></select></div>
+    <div class="form-group"><label>First Cut Cost to Sales Date</label><input type="date" id="tenderCostDate"></div>
+    <div class="form-group"><label>Tender Submission Date</label><input type="date" id="tenderSubDate"></div>
+    <div class="form-group"><label>Assigned Team Members</label><div id="tenderAssignees"></div></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('tenderModal')">Cancel</button><button class="btn btn-primary" id="tenderSaveBtn" onclick="saveTender()">Create Tender</button></div>
+</div></div>
+
+<!-- MODAL: User -->
+<div class="modal-overlay" id="userModal"><div class="modal">
+  <div class="modal-header"><h2>Add Team Member</h2><button class="modal-close" onclick="closeModal('userModal')">&times;</button></div>
+  <div class="modal-body">
+    <div class="form-group"><label>Full Name *</label><input type="text" id="newUserName" placeholder="e.g., John Smith"></div>
+    <div class="form-group"><label>Username *</label><input type="text" id="newUserUsername" placeholder="e.g., john"></div>
+    <div class="form-group"><label>Password *</label><input type="password" id="newUserPass" placeholder="Set a password"></div>
+    <div class="form-group"><label>Role</label><select id="newUserRole"><option value="team">Team Member</option><option value="manager">Manager</option></select></div>
+  </div>
+  <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('userModal')">Cancel</button><button class="btn btn-primary" onclick="addUser()">Add User</button></div>
+</div></div>
+
+<!-- MODAL: Note -->
+<div class="modal-overlay" id="noteModal"><div class="modal">
+  <div class="modal-header"><h2>Add Progress Note</h2><button class="modal-close" onclick="closeModal('noteModal')">&times;</button></div>
+  <div class="modal-body"><div class="form-group"><label>Note *</label><textarea class="notes-area" id="noteText" placeholder="What progress was made today?"></textarea></div></div>
+  <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('noteModal')">Cancel</button><button class="btn btn-primary" onclick="saveNote()">Save Note</button></div>
+</div></div>
+
+<script>
+const STAGES = ['Enquiry Received','Kick-off','Site Visit','Raising Pre-Bid Queries','Sending Enquiries to Civil Contractors','Sending Enquiries to RMC & Rebar Vendors','Collecting Benchmarking Documents','Design & Estimation','Review & Checking','Tender Submission Documentation'];
+
+let currentUser = null;
+let currentTenderId = null;
+let allUsers = [];
+let allTenders = [];
+
+// ============ API HELPERS ============
+async function api(url, opts = {}) {
+  const res = await fetch(url, { headers: { 'Content-Type': 'application/json' }, ...opts });
+  if (res.status === 401) { handleLogout(); return null; }
+  const data = await res.json();
+  if (!res.ok) { alert(data.error || 'Something went wrong'); return null; }
+  return data;
+}
+
+// ============ AUTH ============
+async function handleLogin() {
+  const username = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+  if (res.ok) {
+    currentUser = await res.json();
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('app').classList.add('active');
+    setupApp();
+  } else {
+    const err = document.getElementById('loginError');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 3000);
+  }
+}
+
+async function handleLogout() {
+  await fetch('/api/logout', { method: 'POST' });
+  currentUser = null;
+  document.getElementById('app').classList.remove('active');
+  document.getElementById('loginPage').style.display = '';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+}
+
+// Auto-check session
+(async function() {
+  try {
+    const res = await fetch('/api/me');
+    if (res.ok) {
+      currentUser = await res.json();
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('app').classList.add('active');
+      setupApp();
+    }
+  } catch(e) {}
+})();
+
+document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+// ============ SETUP ============
+async function setupApp() {
+  document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+  document.getElementById('userDisplayName').textContent = currentUser.name;
+  document.getElementById('userRoleDisplay').textContent = currentUser.role === 'manager' ? 'Manager' : 'Team Member';
+  document.getElementById('navUsers').style.display = currentUser.role === 'manager' ? '' : 'none';
+  allUsers = await api('/api/users') || [];
+  showPage('dashboard');
+}
+
+// ============ NAVIGATION ============
+async function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navBtn = document.querySelector(`.nav-item[data-page="${page}"]`);
+  if (navBtn) navBtn.classList.add('active');
+  const titles = { dashboard: 'Dashboard', tenders: 'All Tenders', digest: 'Daily Digest', users: 'Manage Users' };
+  document.getElementById('pageTitle').textContent = titles[page] || '';
+  const actions = document.getElementById('topbarActions');
+  actions.innerHTML = '';
+  if (page === 'tenders' && currentUser.role === 'manager') {
+    actions.innerHTML = '<button class="btn btn-primary btn-sm" onclick="openNewTender()">+ New Tender</button>';
+  }
+
+  switch(page) {
+    case 'dashboard': await renderDashboard(); break;
+    case 'tenders': await renderTenders(); break;
+    case 'digest': await renderDigest(); break;
+    case 'users': await renderUsers(); break;
+    case 'tenderDetail': await renderTenderDetail(); break;
+  }
+
+  const pageEl = document.getElementById('page' + page.charAt(0).toUpperCase() + page.slice(1));
+  if (pageEl) pageEl.classList.add('active');
+  if (page === 'tenderDetail') document.getElementById('pageTenderDetail').classList.add('active');
+}
+
+// ============ HELPERS ============
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function getTenderProgress(t) {
+  if (!t.stages || !t.stages.length) return 0;
+  const done = t.stages.filter(s => s.status === 'completed').length;
+  return Math.round((done / STAGES.length) * 100);
+}
+function daysUntil(dateStr) {
+  if (!dateStr) return 999;
+  const target = new Date(dateStr); const now = new Date();
+  target.setHours(0,0,0,0); now.setHours(0,0,0,0);
+  return Math.round((target - now) / 86400000);
+}
+function formatDate(str) {
+  if (!str) return '—';
+  return new Date(str).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function timeAgo(str) {
+  const diff = (Date.now() - new Date(str).getTime()) / 1000;
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  return Math.floor(diff/86400) + 'd ago';
+}
+function barClass(p) { return p < 30 ? 'low' : p < 70 ? 'mid' : 'high'; }
+
+// ============ DASHBOARD ============
+async function renderDashboard() {
+  allTenders = await api('/api/tenders') || [];
+  const activity = await api('/api/activity') || [];
+
+  const total = allTenders.length;
+  const completed = allTenders.filter(t => getTenderProgress(t) === 100).length;
+  const inProgress = allTenders.filter(t => { const p = getTenderProgress(t); return p > 0 && p < 100; }).length;
+  const overdue = allTenders.filter(t => t.submission_date && new Date(t.submission_date) < new Date() && getTenderProgress(t) < 100).length;
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card highlight"><div class="stat-label">Total Tenders</div><div class="stat-value">${total}</div><div class="stat-sub">${currentUser.role==='manager'?'Across all team':'Assigned to you'}</div></div>
+    <div class="stat-card success"><div class="stat-label">Completed</div><div class="stat-value">${completed}</div><div class="stat-sub">All stages done</div></div>
+    <div class="stat-card warning"><div class="stat-label">In Progress</div><div class="stat-value">${inProgress}</div><div class="stat-sub">Work ongoing</div></div>
+    <div class="stat-card danger"><div class="stat-label">Overdue</div><div class="stat-value">${overdue}</div><div class="stat-sub">Past submission date</div></div>`;
+
+  // Deadlines
+  const upcoming = allTenders.filter(t => t.submission_date && getTenderProgress(t) < 100).sort((a,b) => new Date(a.submission_date) - new Date(b.submission_date)).slice(0, 5);
+  document.getElementById('deadlinesList').innerHTML = upcoming.length ? upcoming.map(t => {
+    const days = daysUntil(t.submission_date);
+    let cls = 'deadline-ok', label = formatDate(t.submission_date);
+    if (days < 0) { cls = 'deadline-urgent'; label = `${Math.abs(days)} days overdue`; }
+    else if (days <= 3) { cls = 'deadline-urgent'; label = days === 0 ? 'Today!' : `${days} day${days>1?'s':''} left`; }
+    else if (days <= 7) { cls = 'deadline-soon'; label = `${days} days left`; }
+    return `<div class="deadline-item"><span class="deadline-name" onclick="viewTender(${t.id})">${esc(t.name)}</span><span class="${cls}">${label}</span></div>`;
+  }).join('') : '<div class="empty-state"><p>No upcoming deadlines</p></div>';
+
+  // Activity
+  document.getElementById('recentActivity').innerHTML = activity.length ? activity.map(a =>
+    `<div class="activity-item"><div class="activity-dot"></div><div><div class="activity-text">${esc(a.text)}</div><div class="activity-time">${timeAgo(a.created_at)}</div></div></div>`
+  ).join('') : '<div class="empty-state"><p>No activity yet</p></div>';
+
+  // Team workload
+  if (currentUser.role === 'manager') {
+    const teamMembers = allUsers.filter(u => u.role === 'team');
+    const allT = allTenders;
+    document.getElementById('teamWorkload').innerHTML = teamMembers.length ? teamMembers.map(u => {
+      const count = allT.filter(t => t.assignees && t.assignees.some(a => a.id === u.id)).length;
+      return `<div class="workload-item"><span class="workload-name">${esc(u.name)}</span><span class="workload-count">${count} tender${count!==1?'s':''}</span></div>`;
+    }).join('') : '<div class="empty-state"><p>No team members yet</p></div>';
+  } else {
+    document.getElementById('teamWorkload').innerHTML = '<div class="empty-state"><p>Visible to managers only</p></div>';
+  }
+
+  // Stage breakdown
+  const stageCounts = STAGES.map(s => ({ name: s, count: allTenders.filter(t => {
+    if (!t.stages || !t.stages.length) return false;
+    const inProg = t.stages.find(st => st.status === 'in_progress');
+    return inProg && inProg.stage_name === s;
+  }).length }));
+  document.getElementById('stageBreakdown').innerHTML = stageCounts.map(s =>
+    `<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid var(--gray-100)"><span>${esc(s.name)}</span><span style="font-weight:600">${s.count}</span></div>`
+  ).join('');
+
+  // Notification bar
+  const bar = document.getElementById('notifBar');
+  const overdueCount = overdue;
+  const urgentCount = allTenders.filter(t => { const d = daysUntil(t.submission_date); return d >= 0 && d <= 3 && getTenderProgress(t) < 100; }).length;
+  if (overdueCount > 0) { bar.className = 'notif-bar warning active'; bar.innerHTML = `&#9888; <strong>${overdueCount} tender${overdueCount>1?'s':''} overdue!</strong> Check Daily Digest for details.`; }
+  else if (urgentCount > 0) { bar.className = 'notif-bar info active'; bar.innerHTML = `&#9200; <strong>${urgentCount} tender${urgentCount>1?'s':''}</strong> due within 3 days.`; }
+  else { bar.className = 'notif-bar'; }
+}
+
+// ============ TENDERS LIST ============
+async function renderTenders() {
+  allTenders = await api('/api/tenders') || [];
+  const tbody = document.getElementById('tendersBody');
+  const empty = document.getElementById('tendersEmpty');
+  if (!allTenders.length) { tbody.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = allTenders.map(t => {
+    const prog = getTenderProgress(t);
+    const overdue = t.submission_date && new Date(t.submission_date) < new Date() && prog < 100;
+    return `<tr onclick="viewTender(${t.id})">
+      <td><strong>${esc(t.name)}</strong></td>
+      <td>${esc(t.sales_lead || '—')}</td>
+      <td>${esc(t.process_lead_name || '—')}</td>
+      <td style="min-width:140px"><div style="display:flex;align-items:center;gap:8px"><div class="progress-bar" style="flex:1"><div class="progress-fill ${barClass(prog)}" style="width:${prog}%"></div></div><span style="font-size:12px;font-weight:600;color:var(--gray-600)">${prog}%</span></div></td>
+      <td>${t.submission_date ? formatDate(t.submission_date) : '—'}</td>
+      <td>${overdue ? '<span class="badge badge-red">Overdue</span>' : prog === 100 ? '<span class="badge badge-green">Complete</span>' : prog > 0 ? '<span class="badge badge-blue">In Progress</span>' : '<span class="badge badge-gray">Not Started</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function viewTender(id) { currentTenderId = id; await showPage('tenderDetail'); }
+
+// ============ TENDER DETAIL ============
+async function renderTenderDetail() {
+  const t = await api(`/api/tenders/${currentTenderId}`);
+  if (!t) return showPage('tenders');
+
+  const isManager = currentUser.role === 'manager';
+  document.getElementById('detailActions').innerHTML = isManager
+    ? '<button class="btn btn-secondary btn-sm" onclick="openEditTender()">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteTender()">Delete</button>'
+    : '';
+  document.getElementById('detailTenderName').textContent = t.name;
+  document.getElementById('pageTitle').textContent = t.name;
+
+  const prog = getTenderProgress(t);
+  document.getElementById('detailMeta').innerHTML = `
+    <div><div class="meta-label">Sales Lead</div><div class="meta-value">${esc(t.sales_lead || '—')}</div></div>
+    <div><div class="meta-label">Process Lead</div><div class="meta-value">${esc(t.process_lead_name || '—')}</div></div>
+    <div><div class="meta-label">First Cut Cost to Sales Date</div><div class="meta-value">${t.cost_date ? formatDate(t.cost_date) : '—'}</div></div>
+    <div><div class="meta-label">Submission Date</div><div class="meta-value">${t.submission_date ? formatDate(t.submission_date) : '—'}</div></div>
+    <div><div class="meta-label">Overall Progress</div><div class="meta-value"><div style="display:flex;align-items:center;gap:8px"><div class="progress-bar" style="width:200px"><div class="progress-fill ${barClass(prog)}" style="width:${prog}%"></div></div><strong>${prog}%</strong></div></div></div>
+    <div><div class="meta-label">Assigned To</div><div class="meta-value">${t.assignees.length ? t.assignees.map(a => esc(a.name)).join(', ') : '—'}</div></div>`;
+
+  const canUpdate = isManager || t.assignees.some(a => a.id === currentUser.id);
+  document.getElementById('detailStages').innerHTML = STAGES.map((s, i) => {
+    const stageData = t.stages.find(st => st.stage_index === i);
+    const status = stageData ? stageData.status : 'not_started';
+    const numCls = status === 'completed' ? 'completed' : status === 'in_progress' ? 'in-progress' : 'not-started';
+    const icon = status === 'completed' ? '&#10003;' : (i + 1);
+    return `<li class="stage-item">
+      <div class="stage-num ${numCls}">${icon}</div>
+      <div class="stage-name">${esc(s)}</div>
+      ${canUpdate ? `<select class="stage-status-select" onchange="updateStage(${t.id}, ${i}, this.value)">
+        <option value="not_started" ${status==='not_started'?'selected':''}>Not Started</option>
+        <option value="in_progress" ${status==='in_progress'?'selected':''}>In Progress</option>
+        <option value="completed" ${status==='completed'?'selected':''}>Completed</option>
+      </select>` : `<span class="badge ${status==='completed'?'badge-green':status==='in_progress'?'badge-blue':'badge-gray'}">${status.replace(/_/g,' ')}</span>`}
+    </li>`;
+  }).join('');
+
+  const notes = t.notes || [];
+  document.getElementById('detailNotes').innerHTML = notes.length ? notes.map(n =>
+    `<div class="activity-item"><div class="activity-dot"></div><div><div class="activity-text">${esc(n.text)}</div><div class="activity-time">${esc(n.author_name)} &middot; ${timeAgo(n.created_at)}</div></div></div>`
+  ).join('') : '<div class="empty-state"><p>No notes yet. Add a daily progress note.</p></div>';
+}
+
+async function updateStage(tenderId, stageIdx, value) {
+  await api(`/api/tenders/${tenderId}/stages/${stageIdx}`, { method: 'PUT', body: JSON.stringify({ status: value }) });
+  renderTenderDetail();
+}
+
+// ============ TENDER MODAL ============
+let editingTenderId = null;
+function openModal(id) { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+async function openNewTender() {
+  editingTenderId = null;
+  document.getElementById('tenderModalTitle').textContent = 'New Tender';
+  document.getElementById('tenderSaveBtn').textContent = 'Create Tender';
+  document.getElementById('tenderName').value = '';
+  document.getElementById('tenderSalesLead').value = '';
+  document.getElementById('tenderCostDate').value = '';
+  document.getElementById('tenderSubDate').value = '';
+  populateDropdowns();
+  openModal('tenderModal');
+}
+
+async function openEditTender() {
+  const t = await api(`/api/tenders/${currentTenderId}`);
+  if (!t) return;
+  editingTenderId = t.id;
+  document.getElementById('tenderModalTitle').textContent = 'Edit Tender';
+  document.getElementById('tenderSaveBtn').textContent = 'Save Changes';
+  document.getElementById('tenderName').value = t.name;
+  document.getElementById('tenderSalesLead').value = t.sales_lead || '';
+  document.getElementById('tenderCostDate').value = t.cost_date || '';
+  document.getElementById('tenderSubDate').value = t.submission_date || '';
+  populateDropdowns(t.process_lead_id, t.assignees.map(a => a.id));
+  openModal('tenderModal');
+}
+
+function populateDropdowns(selectedLead, selectedAssignees = []) {
+  const team = allUsers.filter(u => u.role === 'team');
+  document.getElementById('tenderProcessLead').innerHTML = '<option value="">— Select —</option>' + team.map(u =>
+    `<option value="${u.id}" ${selectedLead==u.id?'selected':''}>${esc(u.name)}</option>`).join('');
+  document.getElementById('tenderAssignees').innerHTML = team.length ? team.map(u =>
+    `<label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:14px;cursor:pointer"><input type="checkbox" value="${u.id}" ${selectedAssignees.includes(u.id)?'checked':''}> ${esc(u.name)}</label>`
+  ).join('') : '<span style="color:var(--gray-400);font-size:13px">No team members yet. Add them in Manage Users first.</span>';
+}
+
+async function saveTender() {
+  const name = document.getElementById('tenderName').value.trim();
+  if (!name) return alert('Please enter a tender name.');
+  const body = {
+    name,
+    sales_lead: document.getElementById('tenderSalesLead').value.trim(),
+    process_lead_id: document.getElementById('tenderProcessLead').value || null,
+    cost_date: document.getElementById('tenderCostDate').value || null,
+    submission_date: document.getElementById('tenderSubDate').value || null,
+    assignee_ids: [...document.querySelectorAll('#tenderAssignees input:checked')].map(c => parseInt(c.value))
+  };
+  if (editingTenderId) {
+    await api(`/api/tenders/${editingTenderId}`, { method: 'PUT', body: JSON.stringify(body) });
+    closeModal('tenderModal');
+    renderTenderDetail();
+  } else {
+    const result = await api('/api/tenders', { method: 'POST', body: JSON.stringify(body) });
+    closeModal('tenderModal');
+    if (result) showPage('tenders');
+  }
+}
+
+async function deleteTender() {
+  if (!confirm('Are you sure you want to delete this tender?')) return;
+  await api(`/api/tenders/${currentTenderId}`, { method: 'DELETE' });
+  showPage('tenders');
+}
+
+// ============ NOTES ============
+function openAddNote() { document.getElementById('noteText').value = ''; openModal('noteModal'); }
+async function saveNote() {
+  const text = document.getElementById('noteText').value.trim();
+  if (!text) return alert('Please enter a note.');
+  await api(`/api/tenders/${currentTenderId}/notes`, { method: 'POST', body: JSON.stringify({ text }) });
+  closeModal('noteModal');
+  renderTenderDetail();
+}
+
+// ============ USERS ============
+async function renderUsers() {
+  allUsers = await api('/api/users') || [];
+  document.getElementById('usersList').innerHTML = allUsers.map(u =>
+    `<div class="user-list-item"><div><strong>${esc(u.name)}</strong> <span style="color:var(--gray-400);font-size:13px">@${esc(u.username)}</span><br><span class="badge ${u.role==='manager'?'badge-blue':'badge-gray'}">${u.role}</span></div>
+    ${u.id !== currentUser.id ? `<button class="btn btn-danger btn-sm" onclick="removeUser(${u.id})">Remove</button>` : '<span class="badge badge-green">You</span>'}</div>`
+  ).join('');
+}
+
+function openAddUser() {
+  document.getElementById('newUserName').value = '';
+  document.getElementById('newUserUsername').value = '';
+  document.getElementById('newUserPass').value = '';
+  document.getElementById('newUserRole').value = 'team';
+  openModal('userModal');
+}
+
+async function addUser() {
+  const name = document.getElementById('newUserName').value.trim();
+  const username = document.getElementById('newUserUsername').value.trim().toLowerCase();
+  const password = document.getElementById('newUserPass').value;
+  const role = document.getElementById('newUserRole').value;
+  if (!name || !username || !password) return alert('Please fill all fields.');
+  const result = await api('/api/users', { method: 'POST', body: JSON.stringify({ name, username, password, role }) });
+  if (result) { closeModal('userModal'); renderUsers(); }
+}
+
+async function removeUser(id) {
+  if (!confirm('Remove this team member?')) return;
+  await api(`/api/users/${id}`, { method: 'DELETE' });
+  renderUsers();
+}
+
+// ============ DIGEST ============
+async function renderDigest() {
+  const data = await api('/api/digest');
+  if (!data) return;
+  let html = `<h3 style="margin-bottom:20px;color:var(--gray-900)">Daily Digest — ${formatDate(new Date().toISOString())}</h3>`;
+
+  if (data.overdue.length) {
+    html += `<div class="card" style="border-left:4px solid var(--danger)"><div class="card-header"><h3 style="color:var(--danger)">&#9888; Overdue Tenders (${data.overdue.length})</h3></div><div class="card-body">`;
+    html += data.overdue.map(t => `<div class="deadline-item"><span class="deadline-name" onclick="viewTender(${t.id})">${esc(t.name)}</span><span class="deadline-urgent">${t.days_overdue} days overdue</span></div>`).join('');
+    html += '</div></div>';
+  }
+  if (data.due_soon.length) {
+    html += `<div class="card" style="border-left:4px solid var(--warning)"><div class="card-header"><h3 style="color:var(--warning)">&#9200; Due Within 7 Days (${data.due_soon.length})</h3></div><div class="card-body">`;
+    html += data.due_soon.map(t => `<div class="deadline-item"><span class="deadline-name" onclick="viewTender(${t.id})">${esc(t.name)}</span><span class="deadline-soon">${t.days_left} day${t.days_left!==1?'s':''} left — ${t.progress}% done</span></div>`).join('');
+    html += '</div></div>';
+  }
+  if (data.not_updated.length) {
+    html += `<div class="card" style="border-left:4px solid var(--gray-400)"><div class="card-header"><h3>&#128221; No Update Today (${data.not_updated.length})</h3></div><div class="card-body">`;
+    html += data.not_updated.map(t => `<div class="deadline-item"><span class="deadline-name" onclick="viewTender(${t.id})">${esc(t.name)}</span><span class="badge badge-gray">Awaiting update</span></div>`).join('');
+    html += '</div></div>';
+  }
+  if (data.updated_today.length) {
+    html += `<div class="card" style="border-left:4px solid var(--success)"><div class="card-header"><h3 style="color:var(--success)">&#9989; Updated Today (${data.updated_today.length})</h3></div><div class="card-body">`;
+    html += data.updated_today.map(t => `<div style="padding:8px 0;border-bottom:1px solid var(--gray-100)"><strong style="cursor:pointer" onclick="viewTender(${t.id})">${esc(t.name)}</strong> — ${t.progress}%</div>`).join('');
+    html += '</div></div>';
+  }
+  if (!data.overdue.length && !data.due_soon.length && !data.not_updated.length && !data.updated_today.length) {
+    html += '<div class="empty-state"><div class="es-icon">&#128203;</div><p>No tenders to report on.</p></div>';
+  }
+  document.getElementById('digestContent').innerHTML = html;
+}
+</script>
+</body>
+</html>
