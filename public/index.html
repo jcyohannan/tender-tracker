@@ -103,8 +103,8 @@ input, select, textarea { font-family: inherit; font-size: 14px; }
 .card-body { padding: 20px; }
 
 table { width: 100%; border-collapse: collapse; }
-table th { text-align: left; padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--gray-100); }
+table th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); white-space: nowrap; }
+table td { padding: 8px 10px; font-size: 13px; border-bottom: 1px solid var(--gray-100); }
 table tr:hover { background: var(--gray-50); }
 table tr { cursor: pointer; }
 
@@ -248,8 +248,8 @@ table tr { cursor: pointer; }
 
       <!-- TENDERS LIST -->
       <div class="page" id="pageTenders">
-        <div class="card"><div class="card-body" style="padding:0">
-          <table id="tendersTable"><thead><tr><th>Tender Name</th><th>Sales Lead</th><th>Process Lead</th><th>Progress</th><th>Submission Date</th><th>Status</th></tr></thead><tbody id="tendersBody"></tbody></table>
+        <div class="card"><div class="card-body" style="padding:0;overflow-x:auto">
+          <table id="tendersTable" style="font-size:13px;min-width:700px"><thead><tr><th>Tender Name</th><th>Type</th><th>Sales Lead</th><th>Process Lead</th><th>Civil Lead</th><th>Progress</th><th>Submission Date</th><th>Status</th></tr></thead><tbody id="tendersBody"></tbody></table>
           <div class="empty-state" id="tendersEmpty" style="display:none"><div class="es-icon">&#128196;</div><p>No tenders yet. Create one to get started.</p></div>
         </div></div>
       </div>
@@ -284,11 +284,13 @@ table tr { cursor: pointer; }
   <div class="modal-header"><h2 id="tenderModalTitle">New Tender</h2><button class="modal-close" onclick="closeModal('tenderModal')">&times;</button></div>
   <div class="modal-body">
     <div class="form-group"><label>Tender Name *</label><input type="text" id="tenderName" placeholder="e.g., ABC Water Treatment Plant"></div>
+    <div class="form-group"><label>Type</label><input type="text" id="tenderType" placeholder="e.g., DESAL, STP, WWTP, WTP"></div>
     <div class="form-group"><label>Sales Lead</label><input type="text" id="tenderSalesLead" placeholder="Name of the sales lead"></div>
-    <div class="form-group"><label>Process Lead</label><select id="tenderProcessLead"></select></div>
+    <div class="form-group"><label>Process Lead</label><input type="text" id="tenderProcessLead" placeholder="Name of the process lead"></div>
     <div class="form-group"><label>First Cut Cost to Sales Date</label><input type="date" id="tenderCostDate"></div>
     <div class="form-group"><label>Tender Submission Date</label><input type="date" id="tenderSubDate"></div>
-    <div class="form-group"><label>Assigned Team Members</label><div id="tenderAssignees"></div></div>
+    <div class="form-group"><label>Remarks</label><textarea class="notes-area" id="tenderRemarks" placeholder="Any additional remarks" style="min-height:60px"></textarea></div>
+    <div class="form-group"><label>Civil Lead / Assigned To</label><div id="tenderAssignees"></div></div>
   </div>
   <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('tenderModal')">Cancel</button><button class="btn btn-primary" id="tenderSaveBtn" onclick="saveTender()">Create Tender</button></div>
 </div></div>
@@ -313,7 +315,7 @@ table tr { cursor: pointer; }
 </div></div>
 
 <script>
-const STAGES = ['Enquiry Received','Kick-off','Site Visit','Raising Pre-Bid Queries','Sending Enquiries to Civil Contractors','Sending Enquiries to RMC & Rebar Vendors','Collecting Benchmarking Documents','Design & Estimation','Review & Checking','Tender Submission Documentation'];
+const STAGES = ['Enquiry Received','Kick-off','Site Visit','Raising Pre-Bid Queries','Process Input Received','Sending Enquiries to Civil Contractors','Sending Enquiries to RMC & Rebar Vendors','Collecting Benchmarking Documents','Design & Estimation','Review & Checking','Tender Documentation','Tender Submission Status'];
 
 let currentUser = null;
 let currentTenderId = null;
@@ -433,6 +435,18 @@ function timeAgo(str) {
   return Math.floor(diff/86400) + 'd ago';
 }
 function barClass(p) { return p < 30 ? 'low' : p < 70 ? 'mid' : 'high'; }
+function getSubmissionStatus(t) {
+  // Returns: 'submitted', 'hold', or 'active'
+  if (!t.stages || !t.stages.length) return 'active';
+  const lastStage = t.stages[t.stages.length - 1];
+  if (!lastStage) return 'active';
+  if (lastStage.status === 'completed') return 'submitted';
+  if (lastStage.status === 'in_progress') return 'hold';
+  return 'active';
+}
+function isSubmitted(t) { return getSubmissionStatus(t) === 'submitted'; }
+function isOnHold(t) { return getSubmissionStatus(t) === 'hold'; }
+function isActive(t) { return getSubmissionStatus(t) === 'active'; }
 
 // ============ DASHBOARD ============
 async function renderDashboard() {
@@ -440,18 +454,20 @@ async function renderDashboard() {
   const activity = await api('/api/activity') || [];
 
   const total = allTenders.length;
-  const completed = allTenders.filter(t => getTenderProgress(t) === 100).length;
-  const inProgress = allTenders.filter(t => { const p = getTenderProgress(t); return p > 0 && p < 100; }).length;
-  const overdue = allTenders.filter(t => t.submission_date && new Date(t.submission_date) < new Date() && getTenderProgress(t) < 100).length;
+  const submitted = allTenders.filter(t => isSubmitted(t)).length;
+  const onHold = allTenders.filter(t => isOnHold(t)).length;
+  const active = allTenders.filter(t => isActive(t)).length;
+  const overdue = allTenders.filter(t => t.submission_date && new Date(t.submission_date) < new Date() && isActive(t)).length;
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card highlight"><div class="stat-label">Total Tenders</div><div class="stat-value">${total}</div><div class="stat-sub">${currentUser.role==='manager'?'Across all team':'Assigned to you'}</div></div>
-    <div class="stat-card success"><div class="stat-label">Completed</div><div class="stat-value">${completed}</div><div class="stat-sub">All stages done</div></div>
-    <div class="stat-card warning"><div class="stat-label">In Progress</div><div class="stat-value">${inProgress}</div><div class="stat-sub">Work ongoing</div></div>
+    <div class="stat-card success"><div class="stat-label">Submitted</div><div class="stat-value">${submitted}</div><div class="stat-sub">Tender submitted</div></div>
+    <div class="stat-card warning"><div class="stat-label">Active</div><div class="stat-value">${active}</div><div class="stat-sub">Work ongoing</div></div>
+    <div class="stat-card" style="border-left:4px solid var(--gray-400)"><div class="stat-label">On Hold</div><div class="stat-value">${onHold}</div><div class="stat-sub">Paused</div></div>
     <div class="stat-card danger"><div class="stat-label">Overdue</div><div class="stat-value">${overdue}</div><div class="stat-sub">Past submission date</div></div>`;
 
   // Deadlines
-  const upcoming = allTenders.filter(t => t.submission_date && getTenderProgress(t) < 100).sort((a,b) => new Date(a.submission_date) - new Date(b.submission_date)).slice(0, 5);
+  const upcoming = allTenders.filter(t => t.submission_date && isActive(t)).sort((a,b) => new Date(a.submission_date) - new Date(b.submission_date)).slice(0, 5);
   document.getElementById('deadlinesList').innerHTML = upcoming.length ? upcoming.map(t => {
     const days = daysUntil(t.submission_date);
     let cls = 'deadline-ok', label = formatDate(t.submission_date);
@@ -471,8 +487,9 @@ async function renderDashboard() {
     const teamMembers = allUsers.filter(u => u.role === 'team');
     const allT = allTenders;
     document.getElementById('teamWorkload').innerHTML = teamMembers.length ? teamMembers.map(u => {
-      const count = allT.filter(t => t.assignees && t.assignees.some(a => a.id === u.id)).length;
-      return `<div class="workload-item"><span class="workload-name">${esc(u.name)}</span><span class="workload-count">${count} tender${count!==1?'s':''}</span></div>`;
+      const activeTenders = allT.filter(t => t.assignees && t.assignees.some(a => a.id === u.id) && isActive(t));
+      const count = activeTenders.length;
+      return `<div class="workload-item"><span class="workload-name">${esc(u.name)}</span><span class="workload-count">${count} active tender${count!==1?'s':''}</span></div>`;
     }).join('') : '<div class="empty-state"><p>No team members yet</p></div>';
   } else {
     document.getElementById('teamWorkload').innerHTML = '<div class="empty-state"><p>Visible to managers only</p></div>';
@@ -491,7 +508,7 @@ async function renderDashboard() {
   // Notification bar
   const bar = document.getElementById('notifBar');
   const overdueCount = overdue;
-  const urgentCount = allTenders.filter(t => { const d = daysUntil(t.submission_date); return d >= 0 && d <= 3 && getTenderProgress(t) < 100; }).length;
+  const urgentCount = allTenders.filter(t => { const d = daysUntil(t.submission_date); return d >= 0 && d <= 3 && isActive(t); }).length;
   if (overdueCount > 0) { bar.className = 'notif-bar warning active'; bar.innerHTML = `&#9888; <strong>${overdueCount} tender${overdueCount>1?'s':''} overdue!</strong> Check Daily Digest for details.`; }
   else if (urgentCount > 0) { bar.className = 'notif-bar info active'; bar.innerHTML = `&#9200; <strong>${urgentCount} tender${urgentCount>1?'s':''}</strong> due within 3 days.`; }
   else { bar.className = 'notif-bar'; }
@@ -506,14 +523,23 @@ async function renderTenders() {
   empty.style.display = 'none';
   tbody.innerHTML = allTenders.map(t => {
     const prog = getTenderProgress(t);
-    const overdue = t.submission_date && new Date(t.submission_date) < new Date() && prog < 100;
+    const subStatus = getSubmissionStatus(t);
+    const overdue = t.submission_date && new Date(t.submission_date) < new Date() && subStatus === 'active';
+    let statusBadge;
+    if (subStatus === 'submitted') statusBadge = '<span class="badge badge-green">Submitted</span>';
+    else if (subStatus === 'hold') statusBadge = '<span class="badge badge-orange">Hold</span>';
+    else if (overdue) statusBadge = '<span class="badge badge-red">Overdue</span>';
+    else if (prog > 0) statusBadge = '<span class="badge badge-blue">In Progress</span>';
+    else statusBadge = '<span class="badge badge-gray">Not Started</span>';
     return `<tr onclick="viewTender(${t.id})">
       <td><strong>${esc(t.name)}</strong></td>
+      <td><span class="badge badge-blue">${esc(t.type || '—')}</span></td>
       <td>${esc(t.sales_lead || '—')}</td>
-      <td>${esc(t.process_lead_name || '—')}</td>
-      <td style="min-width:140px"><div style="display:flex;align-items:center;gap:8px"><div class="progress-bar" style="flex:1"><div class="progress-fill ${barClass(prog)}" style="width:${prog}%"></div></div><span style="font-size:12px;font-weight:600;color:var(--gray-600)">${prog}%</span></div></td>
+      <td>${esc(t.process_lead || '—')}</td>
+      <td>${t.assignees && t.assignees.length ? t.assignees.map(a => esc(a.name)).join(', ') : esc(t.civil_lead || '—')}</td>
+      <td style="min-width:120px"><div style="display:flex;align-items:center;gap:6px"><div class="progress-bar" style="flex:1"><div class="progress-fill ${barClass(prog)}" style="width:${prog}%"></div></div><span style="font-size:11px;font-weight:600;color:var(--gray-600)">${prog}%</span></div></td>
       <td>${t.submission_date ? formatDate(t.submission_date) : '—'}</td>
-      <td>${overdue ? '<span class="badge badge-red">Overdue</span>' : prog === 100 ? '<span class="badge badge-green">Complete</span>' : prog > 0 ? '<span class="badge badge-blue">In Progress</span>' : '<span class="badge badge-gray">Not Started</span>'}</td>
+      <td>${statusBadge}</td>
     </tr>`;
   }).join('');
 }
@@ -534,27 +560,43 @@ async function renderTenderDetail() {
 
   const prog = getTenderProgress(t);
   document.getElementById('detailMeta').innerHTML = `
+    <div><div class="meta-label">Type</div><div class="meta-value">${esc(t.type || '—')}</div></div>
     <div><div class="meta-label">Sales Lead</div><div class="meta-value">${esc(t.sales_lead || '—')}</div></div>
-    <div><div class="meta-label">Process Lead</div><div class="meta-value">${esc(t.process_lead_name || '—')}</div></div>
+    <div><div class="meta-label">Process Lead</div><div class="meta-value">${esc(t.process_lead || '—')}</div></div>
+    <div><div class="meta-label">Civil Lead (Assigned To)</div><div class="meta-value">${t.assignees.length ? t.assignees.map(a => esc(a.name)).join(', ') : esc(t.civil_lead || '—')}</div></div>
     <div><div class="meta-label">First Cut Cost to Sales Date</div><div class="meta-value">${t.cost_date ? formatDate(t.cost_date) : '—'}</div></div>
     <div><div class="meta-label">Submission Date</div><div class="meta-value">${t.submission_date ? formatDate(t.submission_date) : '—'}</div></div>
     <div><div class="meta-label">Overall Progress</div><div class="meta-value"><div style="display:flex;align-items:center;gap:8px"><div class="progress-bar" style="width:200px"><div class="progress-fill ${barClass(prog)}" style="width:${prog}%"></div></div><strong>${prog}%</strong></div></div></div>
-    <div><div class="meta-label">Assigned To</div><div class="meta-value">${t.assignees.length ? t.assignees.map(a => esc(a.name)).join(', ') : '—'}</div></div>`;
+    ${t.remarks ? '<div style="grid-column:1/-1"><div class="meta-label">Remarks</div><div class="meta-value">'+esc(t.remarks)+'</div></div>' : ''}`;
 
   const canUpdate = isManager || t.assignees.some(a => a.id === currentUser.id);
   document.getElementById('detailStages').innerHTML = STAGES.map((s, i) => {
     const stageData = t.stages.find(st => st.stage_index === i);
     const status = stageData ? stageData.status : 'not_started';
     const numCls = status === 'completed' ? 'completed' : status === 'in_progress' ? 'in-progress' : 'not-started';
-    const icon = status === 'completed' ? '&#10003;' : (i + 1);
-    return `<li class="stage-item">
-      <div class="stage-num ${numCls}">${icon}</div>
-      <div class="stage-name">${esc(s)}</div>
-      ${canUpdate ? `<select class="stage-status-select" onchange="updateStage(${t.id}, ${i}, this.value)">
+    const isLastStage = (i === STAGES.length - 1);
+    const icon = status === 'completed' || status === 'submitted' ? '&#10003;' : (i + 1);
+    const numClsFinal = (status === 'submitted') ? 'completed' : numCls;
+    let selectHtml, badgeHtml;
+    if (isLastStage) {
+      selectHtml = `<select class="stage-status-select" onchange="updateStage(${t.id}, ${i}, this.value)">
+        <option value="not_started" ${status==='not_started'?'selected':''}>Not Submitted</option>
+        <option value="in_progress" ${status==='in_progress'?'selected':''}>Hold</option>
+        <option value="completed" ${status==='completed'?'selected':''}>Submitted</option>
+      </select>`;
+      badgeHtml = `<span class="badge ${status==='completed'?'badge-green':status==='in_progress'?'badge-orange':'badge-gray'}">${status==='completed'?'Submitted':status==='in_progress'?'Hold':'Not Submitted'}</span>`;
+    } else {
+      selectHtml = `<select class="stage-status-select" onchange="updateStage(${t.id}, ${i}, this.value)">
         <option value="not_started" ${status==='not_started'?'selected':''}>Not Started</option>
         <option value="in_progress" ${status==='in_progress'?'selected':''}>In Progress</option>
         <option value="completed" ${status==='completed'?'selected':''}>Completed</option>
-      </select>` : `<span class="badge ${status==='completed'?'badge-green':status==='in_progress'?'badge-blue':'badge-gray'}">${status.replace(/_/g,' ')}</span>`}
+      </select>`;
+      badgeHtml = `<span class="badge ${status==='completed'?'badge-green':status==='in_progress'?'badge-blue':'badge-gray'}">${status.replace(/_/g,' ')}</span>`;
+    }
+    return `<li class="stage-item">
+      <div class="stage-num ${numClsFinal}">${icon}</div>
+      <div class="stage-name">${esc(s)}</div>
+      ${canUpdate ? selectHtml : badgeHtml}
     </li>`;
   }).join('');
 
@@ -579,10 +621,13 @@ async function openNewTender() {
   document.getElementById('tenderModalTitle').textContent = 'New Tender';
   document.getElementById('tenderSaveBtn').textContent = 'Create Tender';
   document.getElementById('tenderName').value = '';
+  document.getElementById('tenderType').value = '';
   document.getElementById('tenderSalesLead').value = '';
+  document.getElementById('tenderProcessLead').value = '';
   document.getElementById('tenderCostDate').value = '';
   document.getElementById('tenderSubDate').value = '';
-  populateDropdowns();
+  document.getElementById('tenderRemarks').value = '';
+  populateAssigneeCheckboxes();
   openModal('tenderModal');
 }
 
@@ -593,17 +638,18 @@ async function openEditTender() {
   document.getElementById('tenderModalTitle').textContent = 'Edit Tender';
   document.getElementById('tenderSaveBtn').textContent = 'Save Changes';
   document.getElementById('tenderName').value = t.name;
+  document.getElementById('tenderType').value = t.type || '';
   document.getElementById('tenderSalesLead').value = t.sales_lead || '';
+  document.getElementById('tenderProcessLead').value = t.process_lead || '';
   document.getElementById('tenderCostDate').value = t.cost_date || '';
   document.getElementById('tenderSubDate').value = t.submission_date || '';
-  populateDropdowns(t.process_lead_id, t.assignees.map(a => a.id));
+  document.getElementById('tenderRemarks').value = t.remarks || '';
+  populateAssigneeCheckboxes(t.assignees.map(a => a.id));
   openModal('tenderModal');
 }
 
-function populateDropdowns(selectedLead, selectedAssignees = []) {
+function populateAssigneeCheckboxes(selectedAssignees = []) {
   const team = allUsers.filter(u => u.role === 'team');
-  document.getElementById('tenderProcessLead').innerHTML = '<option value="">— Select —</option>' + team.map(u =>
-    `<option value="${u.id}" ${selectedLead==u.id?'selected':''}>${esc(u.name)}</option>`).join('');
   document.getElementById('tenderAssignees').innerHTML = team.length ? team.map(u =>
     `<label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:14px;cursor:pointer"><input type="checkbox" value="${u.id}" ${selectedAssignees.includes(u.id)?'checked':''}> ${esc(u.name)}</label>`
   ).join('') : '<span style="color:var(--gray-400);font-size:13px">No team members yet. Add them in Manage Users first.</span>';
@@ -614,10 +660,12 @@ async function saveTender() {
   if (!name) return alert('Please enter a tender name.');
   const body = {
     name,
+    type: document.getElementById('tenderType').value.trim() || null,
     sales_lead: document.getElementById('tenderSalesLead').value.trim(),
-    process_lead_id: document.getElementById('tenderProcessLead').value || null,
+    process_lead: document.getElementById('tenderProcessLead').value.trim() || null,
     cost_date: document.getElementById('tenderCostDate').value || null,
     submission_date: document.getElementById('tenderSubDate').value || null,
+    remarks: document.getElementById('tenderRemarks').value.trim() || null,
     assignee_ids: [...document.querySelectorAll('#tenderAssignees input:checked')].map(c => parseInt(c.value))
   };
   if (editingTenderId) {

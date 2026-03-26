@@ -34,9 +34,10 @@ initDB();
 
 const STAGES = [
   'Enquiry Received', 'Kick-off', 'Site Visit', 'Raising Pre-Bid Queries',
+  'Process Input Received',
   'Sending Enquiries to Civil Contractors', 'Sending Enquiries to RMC & Rebar Vendors',
   'Collecting Benchmarking Documents', 'Design & Estimation',
-  'Review & Checking', 'Tender Submission Documentation'
+  'Review & Checking', 'Tender Documentation', 'Tender Submission Status'
 ];
 
 // Middleware
@@ -122,11 +123,9 @@ app.get('/api/tenders', requireAuth, (req, res) => {
   if (req.user.role !== 'manager') {
     tenders = tenders.filter(t => (t.assignee_ids || []).includes(req.user.id));
   }
-  // Enrich with names
   const enriched = tenders.map(t => {
-    const processLead = db.users.find(u => u.id === t.process_lead_id);
     const assignees = (t.assignee_ids || []).map(id => { const u = db.users.find(x => x.id === id); return u ? { id: u.id, name: u.name } : null; }).filter(Boolean);
-    return { ...t, process_lead_name: processLead ? processLead.name : null, assignees };
+    return { ...t, assignees };
   });
   res.json(enriched);
 });
@@ -135,21 +134,21 @@ app.get('/api/tenders/:id', requireAuth, (req, res) => {
   const db = loadDB();
   const t = db.tenders.find(x => x.id === parseInt(req.params.id));
   if (!t) return res.status(404).json({ error: 'Tender not found' });
-  const processLead = db.users.find(u => u.id === t.process_lead_id);
   const assignees = (t.assignee_ids || []).map(id => { const u = db.users.find(x => x.id === id); return u ? { id: u.id, name: u.name } : null; }).filter(Boolean);
   const notes = (t.notes || []).map(n => { const u = db.users.find(x => x.id === n.author_id); return { ...n, author_name: u ? u.name : 'Unknown' }; }).reverse();
-  res.json({ ...t, process_lead_name: processLead ? processLead.name : null, assignees, notes });
+  res.json({ ...t, assignees, notes });
 });
 
 app.post('/api/tenders', requireAuth, requireManager, (req, res) => {
-  const { name, sales_lead, process_lead_id, cost_date, submission_date, assignee_ids } = req.body;
+  const { name, type, sales_lead, process_lead, civil_lead, cost_date, submission_date, remarks, assignee_ids } = req.body;
   if (!name) return res.status(400).json({ error: 'Tender name required' });
   const db = loadDB();
   const tender = {
     id: db.nextTenderId++,
-    name, sales_lead: sales_lead || null,
-    process_lead_id: process_lead_id ? parseInt(process_lead_id) : null,
+    name, type: type || null, sales_lead: sales_lead || null,
+    process_lead: process_lead || null, civil_lead: civil_lead || null,
     cost_date: cost_date || null, submission_date: submission_date || null,
+    remarks: remarks || null,
     assignee_ids: (assignee_ids || []).map(Number),
     stages: STAGES.map((s, i) => ({ stage_index: i, stage_name: s, status: 'not_started' })),
     notes: [],
@@ -162,13 +161,14 @@ app.post('/api/tenders', requireAuth, requireManager, (req, res) => {
 });
 
 app.put('/api/tenders/:id', requireAuth, requireManager, (req, res) => {
-  const { name, sales_lead, process_lead_id, cost_date, submission_date, assignee_ids } = req.body;
+  const { name, type, sales_lead, process_lead, civil_lead, cost_date, submission_date, remarks, assignee_ids } = req.body;
   const db = loadDB();
   const t = db.tenders.find(x => x.id === parseInt(req.params.id));
   if (!t) return res.status(404).json({ error: 'Not found' });
-  t.name = name; t.sales_lead = sales_lead || null;
-  t.process_lead_id = process_lead_id ? parseInt(process_lead_id) : null;
+  t.name = name; t.type = type || null; t.sales_lead = sales_lead || null;
+  t.process_lead = process_lead || null; t.civil_lead = civil_lead || null;
   t.cost_date = cost_date || null; t.submission_date = submission_date || null;
+  t.remarks = remarks || null;
   t.assignee_ids = (assignee_ids || []).map(Number);
   saveDB(db);
   logActivity(`${req.user.name} updated tender "${name}"`, req.user.id);

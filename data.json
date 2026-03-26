@@ -1,0 +1,2371 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "username": "admin",
+      "password": "$2a$10$dFrD2q/xUSNgOQi/efIfJO5UqbnbvitygjPVpv/uzKANjP0906ej.",
+      "role": "manager",
+      "created_at": "2026-03-26T17:22:25.492Z"
+    },
+    {
+      "id": 2,
+      "name": "Senbagam",
+      "username": "senbagam",
+      "password": "$2a$10$nrf/pvsSogisOOsf5dBsV.z1D2t8zglp3NFpw2NNWSqfrV5x5N4I2",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.549Z"
+    },
+    {
+      "id": 3,
+      "name": "Ragu",
+      "username": "ragu",
+      "password": "$2a$10$7QouIh8OUhdnkcww2nAXuesuHJoYHeskz/DAUEhmP9N57RbKclGqK",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.606Z"
+    },
+    {
+      "id": 4,
+      "name": "Vivasan",
+      "username": "vivasan",
+      "password": "$2a$10$WWvqYm/V.b0zyovyA449jerodpOSEBC4DI2A4idLs8vP9KnL8QnT.",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.664Z"
+    },
+    {
+      "id": 5,
+      "name": "Keerthivasan",
+      "username": "keerthivasan",
+      "password": "$2a$10$UhirrLtoxY5Fn3z0Z7ApJ.ww0FHqovkjmFCJDl4MJSzu5oOxsGEfS",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.721Z"
+    },
+    {
+      "id": 6,
+      "name": "Akshaya",
+      "username": "akshaya",
+      "password": "$2a$10$5j0RFgK.DWxwRxgrBmDU2OCsqVKQM9S2hKvhe2t39uyIMClf7jruy",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.777Z"
+    },
+    {
+      "id": 7,
+      "name": "Radhika",
+      "username": "radhika",
+      "password": "$2a$10$kq2kXeaK2smKkS9KXzMukeU2WEG3unjhXoagRcj96BAnr7r5h2F1m",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.833Z"
+    },
+    {
+      "id": 8,
+      "name": "Arun",
+      "username": "arun",
+      "password": "$2a$10$t6fxthZD/VPtnA9GUOHkOuzRDzzLiuVtMEll64PBWAaHDmKf42WDK",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.889Z"
+    },
+    {
+      "id": 9,
+      "name": "Jibi",
+      "username": "jibi",
+      "password": "$2a$10$zkqttWeV2U3BAbqKyw7LL.5mVfztWXGsF727.8Y2vWQiEFiudoKJu",
+      "role": "team",
+      "created_at": "2026-03-26T17:22:25.946Z"
+    }
+  ],
+  "tenders": [
+    {
+      "id": 1,
+      "name": "10V2312_MEWRE_Doha_Kuwait_SWRO_Retender",
+      "type": "DESAL",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": null,
+      "submission_date": "2025-08-05",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 2,
+      "name": "10V2282_SWPC_HADDA_100 MLD_ISTP",
+      "type": "STP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": "2025-06-11",
+      "submission_date": "2025-06-27",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 3,
+      "name": "10V2281_SWPC_ARANA_250 MLD ISTP",
+      "type": "STP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": "2025-06-11",
+      "submission_date": "2025-06-27",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 4,
+      "name": "10V2271_JSC OTEKO_136.8 MLD DESAL",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Abijeet",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": null,
+      "remarks": "ntep submitted",
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 5,
+      "name": "10V2309_CAPW_250 MLD WWTP",
+      "type": "WWTP",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Ragu",
+      "cost_date": null,
+      "submission_date": "2025-11-11",
+      "remarks": null,
+      "assignee_ids": [
+        3
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 6,
+      "name": "10V2311_ACWA_AL HIDD_IWP_DESAL",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Santhosh",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": null,
+      "submission_date": "2026-01-23",
+      "remarks": "RFQ by 2nd week expected",
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 7,
+      "name": "10V2323_SWA_Aljouf_35 MLD BWRO",
+      "type": "DESAL",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": null,
+      "submission_date": "2025-07-08",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 8,
+      "name": "SWA_Aljouf_50 MLD BWRO",
+      "type": "DESAL",
+      "sales_lead": "Pankaj",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": null,
+      "submission_date": "2025-08-03",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 9,
+      "name": "Dalian 100 MLD SWRO",
+      "type": "DESAL",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": null,
+      "remarks": null,
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 10,
+      "name": "Fujairah-60 MIGD",
+      "type": "DESAL",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": "2025-08-14",
+      "submission_date": "2025-09-26",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 11,
+      "name": "Samarkhand, Uzbekisthan -100 MLD WWTP",
+      "type": "WWTP",
+      "sales_lead": "Akash",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2025-07-25",
+      "remarks": null,
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 12,
+      "name": "ZULUF-307 MLD",
+      "type": "WTP",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2025-08-30",
+      "remarks": null,
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 13,
+      "name": "Namangan, Uzbekisthan -100 MLD WWTP",
+      "type": "WWTP",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Senbagam",
+      "cost_date": null,
+      "submission_date": "2025-09-20",
+      "remarks": null,
+      "assignee_ids": [
+        2
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 14,
+      "name": "4 Plants - Army",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2025-09-28",
+      "remarks": null,
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 15,
+      "name": "Morrocco -PFC-Jesa",
+      "type": "Desal-Without marine",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan",
+      "cost_date": "2025-10-23",
+      "submission_date": "2025-09-15",
+      "remarks": "Final Submission date not confirmed, currently answering post bid queries.",
+      "assignee_ids": [
+        3,
+        4
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 16,
+      "name": "Senegal-400 MLD",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2025-10-09",
+      "remarks": "EP Only",
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 17,
+      "name": "Marafiq (45/60) MLD",
+      "type": "DESAL-without Marine",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan/keerthivashan",
+      "cost_date": "2025-10-27",
+      "submission_date": "2025-11-25",
+      "remarks": null,
+      "assignee_ids": [
+        3,
+        4,
+        5
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "completed"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 18,
+      "name": "Taqa -Nareva -Oriental -822 MLD LOT 01",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2026-01-25",
+      "remarks": null,
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 19,
+      "name": "Tangier- 411 mld desal",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Mani",
+      "process_lead": null,
+      "civil_lead": "Senbagam/ Akshaya",
+      "cost_date": null,
+      "submission_date": "2026-01-23",
+      "remarks": "Standalone",
+      "assignee_ids": [
+        2,
+        6
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 20,
+      "name": "AL Khairan- 125 MLD SWRO",
+      "type": "DESAL",
+      "sales_lead": "Balaji, Akash",
+      "process_lead": null,
+      "civil_lead": null,
+      "cost_date": null,
+      "submission_date": "2025-12-31",
+      "remarks": "NTEP Submitted",
+      "assignee_ids": [],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 21,
+      "name": "Maurutiana- 1.5 MLD",
+      "type": "DESAL-with Marine",
+      "sales_lead": "Nitish Kumar",
+      "process_lead": null,
+      "civil_lead": "Jibi",
+      "cost_date": null,
+      "submission_date": null,
+      "remarks": null,
+      "assignee_ids": [
+        9
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 22,
+      "name": "Riyadh East-200 MLD ISTP",
+      "type": "ISTP",
+      "sales_lead": "Pankaj",
+      "process_lead": null,
+      "civil_lead": "Keerthivasan",
+      "cost_date": null,
+      "submission_date": "2025-04-01",
+      "remarks": null,
+      "assignee_ids": [
+        5
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 23,
+      "name": "Uzbek_Jizzakh_Fergana_2*STP+ 3*Rhab",
+      "type": "STP",
+      "sales_lead": "Akash",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan",
+      "cost_date": null,
+      "submission_date": "2025-11-07",
+      "remarks": "Submission date is not confirmed yet.",
+      "assignee_ids": [
+        3,
+        4
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 24,
+      "name": "Tashkent 550 MLD",
+      "type": "WTP",
+      "sales_lead": "Pankaj Virkar",
+      "process_lead": null,
+      "civil_lead": "Radhika",
+      "cost_date": "2025-12-15",
+      "submission_date": "2026-02-05",
+      "remarks": "WTP plant + 50 km pipeline",
+      "assignee_ids": [
+        7
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 25,
+      "name": "Ajman- 60 MLD",
+      "type": "STP",
+      "sales_lead": "Pankaj Virkar",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan",
+      "cost_date": "2026-01-11",
+      "submission_date": "2026-02-05",
+      "remarks": "Support, Construction partner- Kalpataru. Civil BOQ Challenge",
+      "assignee_ids": [
+        3,
+        4
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 26,
+      "name": "King Salman- 54 MLD",
+      "type": "WWTP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan",
+      "cost_date": null,
+      "submission_date": "2026-01-14",
+      "remarks": "EPC Bidder- Al Rawaf, EP SC- Wabag. Civil has to be done for 91 MLD",
+      "assignee_ids": [
+        3,
+        4
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "completed"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 27,
+      "name": "Galilah 30 MIGD",
+      "type": "IWP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Ragu/ Vivasan",
+      "cost_date": null,
+      "submission_date": "2026-02-23",
+      "remarks": null,
+      "assignee_ids": [
+        3,
+        4
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "completed"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 28,
+      "name": "Safaniyah",
+      "type": "Oil & gas packages/WTP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Radhika",
+      "cost_date": null,
+      "submission_date": "2025-12-30",
+      "remarks": "Oil & gas packages. Only supply, civil out of scope. NTEP submitted, civil cost not reqd",
+      "assignee_ids": [
+        7
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "in_progress"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "completed"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "completed"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "completed"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    },
+    {
+      "id": 29,
+      "name": "Surum-1000 MLD",
+      "type": "WWTP",
+      "sales_lead": "Balaji",
+      "process_lead": null,
+      "civil_lead": "Radhika",
+      "cost_date": null,
+      "submission_date": "2026-01-20",
+      "remarks": "1000 MLD WWTP, JV Kalpataru",
+      "assignee_ids": [
+        7
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "stage_name": "Enquiry Received",
+          "status": "completed"
+        },
+        {
+          "stage_index": 1,
+          "stage_name": "Kick-off",
+          "status": "completed"
+        },
+        {
+          "stage_index": 2,
+          "stage_name": "Site Visit",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 3,
+          "stage_name": "Raising Pre-Bid Queries",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 4,
+          "stage_name": "Process Input Received",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 5,
+          "stage_name": "Sending Enquiries to Civil Contractors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 6,
+          "stage_name": "Sending Enquiries to RMC & Rebar Vendors",
+          "status": "completed"
+        },
+        {
+          "stage_index": 7,
+          "stage_name": "Collecting Benchmarking Documents",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 8,
+          "stage_name": "Design & Estimation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 9,
+          "stage_name": "Review & Checking",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 10,
+          "stage_name": "Tender Documentation",
+          "status": "not_started"
+        },
+        {
+          "stage_index": 11,
+          "stage_name": "Tender Submission Status",
+          "status": "not_started"
+        }
+      ],
+      "notes": [],
+      "created_by": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    }
+  ],
+  "activity": [
+    {
+      "text": "Imported 28 tenders from spreadsheet",
+      "user_id": 1,
+      "created_at": "2026-03-26T17:22:25.947Z"
+    }
+  ],
+  "nextUserId": 10,
+  "nextTenderId": 30,
+  "nextNoteId": 1
+}
